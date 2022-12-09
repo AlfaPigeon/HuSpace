@@ -32,9 +32,9 @@ public class PlayerScript : MonoBehaviour
 
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = -9.812155f;
-        Vector3 dir = Camera.main.ScreenToWorldPoint(mousePos) - gunPivot.position;
+        Vector3 dir = mousePos - Camera.main.WorldToScreenPoint(gunPivot.position);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Debug.Log(Camera.main.ScreenToWorldPoint(mousePos));
+        Debug.Log(dir);
         gunPivot.localRotation = Quaternion.Euler(gunPivot.localRotation.eulerAngles.x, gunPivot.localRotation.eulerAngles.y, angle);
     }
 
