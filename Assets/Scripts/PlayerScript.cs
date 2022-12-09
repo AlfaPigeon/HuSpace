@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-
-
     private Rigidbody rb;
     [Header("Movement")]
     private Vector3 velocity ;
@@ -15,15 +13,12 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb =   GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
         velocity = new Vector3(speed*Input.GetAxisRaw("Horizontal"), velocity.y, speed* Input.GetAxisRaw("Vertical"));
-
         rb.velocity = velocity;
     }
 }
