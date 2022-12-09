@@ -12,13 +12,13 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb =   GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        velocity = new Vector3(speed*Input.GetAxisRaw("Horizontal"), velocity.y, speed* Input.GetAxisRaw("Vertical"));
+        velocity = new Vector3(speed * Input.GetAxisRaw("Horizontal"), velocity.y, speed * Input.GetAxisRaw("Vertical"));
         rb.velocity = velocity;
     }
 }
