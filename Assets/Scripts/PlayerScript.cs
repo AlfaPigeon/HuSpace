@@ -6,8 +6,12 @@ public class PlayerScript : MonoBehaviour
 {
     private Rigidbody rb;
     [Header("Movement")]
-    private Vector3 velocity ;
+    private Vector3 velocity;
     public float speed = 5f;
+    public Transform movementReference;
+    public GameObject bullet;
+    public Transform barrel;
+    public Transform gunPivot;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +22,24 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        velocity = new Vector3(speed * Input.GetAxisRaw("Horizontal"), velocity.y, speed * Input.GetAxisRaw("Vertical"));
+        velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
         rb.velocity = velocity;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+        }
+
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = -9.812155f;
+        Vector3 dir = Camera.main.ScreenToWorldPoint(mousePos) - gunPivot.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Debug.Log(Camera.main.ScreenToWorldPoint(mousePos));
+        gunPivot.localRotation = Quaternion.Euler(gunPivot.localRotation.eulerAngles.x, gunPivot.localRotation.eulerAngles.y, angle);
+    }
+
+    public void Fire()
+    {
+        Instantiate(bullet, barrel.position, barrel.rotation);
     }
 }
