@@ -19,14 +19,16 @@ public class Enemy_Slimy : Enemy
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, player.transform.position, out hit,Attack_range))
+            if (Physics.Raycast(transform.position, player.transform.position-transform.position, out hit, Attack_range))
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
+                Debug.DrawRay(transform.position, (player.transform.position - transform.position) * hit.distance, Color.green);
                 Debug.Log("Did Hit");
+                Debug.Log(hit.collider.gameObject.name);
+                if (hit.collider.tag == "Player") Debug.Log("Player is hit");
             }
             else
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+                Debug.DrawRay(transform.position, (player.transform.position - transform.position) * hit.distance, Color.red);
                 Debug.Log("Did not Hit");
             }
         }
