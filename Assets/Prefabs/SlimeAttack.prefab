@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d525ecf5f1ab4f47be8faa573207118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxvalue: 100
+  maxvalue: 2
   sprite: {fileID: 3827474513843713331}
   value: 0
+  _rotate: 0

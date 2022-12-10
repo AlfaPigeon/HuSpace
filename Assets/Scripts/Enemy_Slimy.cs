@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy_Slimy : Enemy
 {
@@ -8,6 +9,7 @@ public class Enemy_Slimy : Enemy
 
     public float Attack_range = 10f;
 
+    public GameObject Slime_Attack;
     public override void Start()
     {
         base.Start();
@@ -22,9 +24,12 @@ public class Enemy_Slimy : Enemy
             if (Physics.Raycast(transform.position, player.transform.position-transform.position, out hit, Attack_range))
             {
                 Debug.DrawRay(transform.position, (player.transform.position - transform.position) * hit.distance, Color.green);
-                Debug.Log("Did Hit");
-                Debug.Log(hit.collider.gameObject.name);
-                if (hit.collider.tag == "Player") Debug.Log("Player is hit");
+
+                if (hit.collider.tag == "Player")
+                {
+                    Agrasive = false;
+                    Attack(hit.collider.transform);
+                }
             }
             else
             {
@@ -34,8 +39,15 @@ public class Enemy_Slimy : Enemy
         }
     }
 
-    public void Attack()
+    public void Attack(Transform enemy)
     {
+        GameObject gameObject =  Instantiate(Slime_Attack, transform.position,transform.rotation);
+
+        gameObject.transform.LookAt(enemy);
+        gameObject.transform.Rotate(0, 90, 0);
+
+
+
 
     }
 }
