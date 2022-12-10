@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5352615141822847819}
   - component: {fileID: 3557203304342529657}
-  - component: {fileID: 9049463859422120853}
+  - component: {fileID: 5985870356936638395}
   m_Layer: 0
   m_Name: Bullet Collider
   m_TagString: Untagged
@@ -180,7 +180,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.349393, y: 0.11105633, z: 0.24203166}
   m_Center: {x: 0.009661049, y: -0.000002861023, z: -0.02254586}
---- !u!114 &9049463859422120853
+--- !u!114 &5985870356936638395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,9 +189,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4803099599436787426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f91219bb3e70f4b96f7a2a48810ee8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cc60efd45fce3a4fbba959a39cf6eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
-  bulletRigidbody: {fileID: 2229896135521027736}
-  bulletSprite: {fileID: 911558312670767254}

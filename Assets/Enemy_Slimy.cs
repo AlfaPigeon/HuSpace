@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Slimy : MonoBehaviour
+public class Enemy_Slimy : Enemy
 {
     public bool Agrasive = false;
 
     public float Attack_range = 10f;
 
-    private GameObject player;
-
-    private void Start()
+    public override void Start()
     {
-        PlayerScript player_s = FindObjectOfType<PlayerScript>();
-        if (player_s != null) player = player_s.gameObject;
+        base.Start();
     }
-
 
     private void FixedUpdate()
     {
@@ -35,7 +31,6 @@ public class Enemy_Slimy : MonoBehaviour
             }
         }
     }
-
 
     public void Attack()
     {

@@ -64,5 +64,8 @@ public class PlayerScript : MonoBehaviour
 
         //Move along fake pivot axis
         lastBullet.GetComponent<Rigidbody>().velocity = fakeGunPivot.right * 12.5f;
+
+        //Effects
+        ScreenShaker.Instance.ShakeCamera(0.1f, 0.7f, 4f);
     }
 }
