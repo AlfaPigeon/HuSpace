@@ -161,12 +161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29763800a0cbe047b4e29909c88edc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   maxHealth: 100
   currentHealth: 100
   enemyHealthBar: {fileID: 493408909913810707}
   dieParticle: {fileID: 7422937595119476472, guid: 8b0d860d70ad8f34f83f7706aaa5421e, type: 3}
   scoopyRigidbody: {fileID: 1869165678435930621}
   scoopySpeed: 3
+  aggressive: 0
 --- !u!1 &5871266584682134030
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +221,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b1157c1fb0aacf3498f140b21bca6af8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

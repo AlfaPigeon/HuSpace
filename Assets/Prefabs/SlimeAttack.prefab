@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxvalue: 2
   sprite: {fileID: 3827474513843713331}
+  enemy: {fileID: 0}
   value: 0
   _rotate: 0
 --- !u!54 &8660571967844578739
