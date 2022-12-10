@@ -70,6 +70,7 @@ MonoBehaviour:
   dieParticle: {fileID: 1689913060852034490, guid: 6e488e64f14eccc4aae652d4ff735060, type: 3}
   Agrasive: 0
   Attack_range: 10
+  Slime_Attack: {fileID: 3827474514978667242, guid: 1b7830e947945b147b9e1ffe4f8c920f, type: 3}
 --- !u!1 &1869165678506419643
 GameObject:
   m_ObjectHideFlags: 0

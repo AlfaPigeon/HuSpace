@@ -8,6 +8,6 @@ public class SetupSpriteShadow : MonoBehaviour
     
     void Start()
     {
-        GetComponent<SpriteRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        //GetComponent<SpriteRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
     }
 }

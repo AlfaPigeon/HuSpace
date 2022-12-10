@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3827474514978667237}
   - component: {fileID: 3827474514978667236}
+  - component: {fileID: 8660571967844578739}
   m_Layer: 0
   m_Name: SlimeAttack
   m_TagString: Untagged
@@ -143,6 +144,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d525ecf5f1ab4f47be8faa573207118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxvalue: 100
+  maxvalue: 2
   sprite: {fileID: 3827474513843713331}
   value: 0
+  _rotate: 0
+--- !u!54 &8660571967844578739
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3827474514978667242}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
