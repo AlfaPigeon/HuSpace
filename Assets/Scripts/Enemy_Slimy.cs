@@ -42,12 +42,8 @@ public class Enemy_Slimy : Enemy
     public void Attack(Transform enemy)
     {
         GameObject gameObject =  Instantiate(Slime_Attack, transform.position,transform.rotation);
-
+        gameObject.GetComponent<SlimeAttack>().enemy = this;
         gameObject.transform.LookAt(enemy);
         gameObject.transform.Rotate(0, 90, 0);
-
-
-
-
     }
 }

@@ -9,6 +9,9 @@ public class SlimeAttack : MonoBehaviour
 
     public Transform sprite;
 
+    public Enemy_Slimy enemy;
+ 
+
     public float value;
 
     public float _rotate = 0f;
@@ -25,8 +28,6 @@ public class SlimeAttack : MonoBehaviour
 
     private IEnumerator Attack()
     {
-
-
         while (maxvalue> value)
         {
             value += 0.2f;
@@ -38,10 +39,16 @@ public class SlimeAttack : MonoBehaviour
 
 
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnCollisionEnter");
+        if(other.tag == "Player")
+        {
+            enemy.GetComponent<Rigidbody>().velocity = 10*(other.transform.position - enemy.transform.position).normalized;
+            Destroy(gameObject);
+        }
+
     }
 
-
+  
 }
