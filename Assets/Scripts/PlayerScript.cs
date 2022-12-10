@@ -16,6 +16,9 @@ public class PlayerScript : MonoBehaviour
     public Transform gunPivot;
     public Transform fakeGunPivot;
 
+    public AudioSource playerAudio;
+    public AudioClip shootingClip;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,5 +70,6 @@ public class PlayerScript : MonoBehaviour
 
         //Effects
         ScreenShaker.Instance.ShakeCamera(0.1f, 0.7f, 4f);
+        playerAudio.PlayOneShot(shootingClip);
     }
 }
