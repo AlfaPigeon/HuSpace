@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb388c8bbd842de972b107fd2271863, type: 3}
   m_Name: SpawnerSettingsSO
   m_EditorClassIdentifier: 
-  circleRadius: 0
-  spawnCountPerWave: 0
-  waveTime: 0
-  randomSpawn: 0
+  circleRadius: 20
+  yOffset: 2
+  spawnCountPerWave: 4
+  waveTime: 2
+  enemyArray:
+  - {fileID: 7764754035698451311, guid: 1024d0b15850e544a8a237435d5514a5, type: 3}
+  randomEnemySpawn: 0
+  spawningEnemyIndex: 0
+  randomPositionSpawn: 1
   spawnFromAngle: 0
+  spaceBetween: 0

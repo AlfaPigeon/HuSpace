@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public enum EnemyType
+    {
+        Slimy,
+        Scoopy
+    }
+
+    public EnemyType enemyType;
+
     public float maxHealth;
     public float currentHealth;
 
