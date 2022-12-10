@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     protected GameObject player;
     private PlayerScript playerScript;
 
+    public ParticleSystem dieParticle;
+
     public virtual void Start()
     {
         currentHealth = maxHealth;
@@ -18,15 +20,21 @@ public class Enemy : MonoBehaviour
         playerScript = player.GetComponent<PlayerScript>();
     }
 
-    public virtual void Damage(float amount)
+    public virtual void OnDamaged(float amount)
     {
-        if (currentHealth - amount < 0) currentHealth = 0;
+        if (currentHealth - amount <= 0)
+        {
+            currentHealth = 0;
+            OnKilled();
+            return; 
+        }
+
         else currentHealth -= amount;
 
         enemyHealthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
-    public virtual void Heal(float amount)
+    public virtual void OnHealed(float amount)
     {
         if (currentHealth + amount > maxHealth) currentHealth = maxHealth;
         else currentHealth += amount;
@@ -34,9 +42,9 @@ public class Enemy : MonoBehaviour
         enemyHealthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
-    public virtual void Kill()
+    public virtual void OnKilled()
     {
-        currentHealth = 0;
-        enemyHealthBar.UpdateHealthBar(currentHealth, maxHealth);
+        Destroy(gameObject);
+        if (dieParticle != null) Instantiate(dieParticle, transform.position, Quaternion.identity);
     }
 }

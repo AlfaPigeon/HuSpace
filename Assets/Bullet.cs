@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private void OnEnable()
+    {
+        Destroy(transform.parent.gameObject, 4f);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            other.transform.parent.GetComponent<Enemy>().Damage(20f);
+            other.transform.parent.GetComponent<Enemy>().OnDamaged(20f);
             Destroy(transform.parent.gameObject);
         }
     }

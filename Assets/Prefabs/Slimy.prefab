@@ -184,6 +184,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   enemyHealthBar: {fileID: 7581467946862575613}
+  dieParticle: {fileID: 1689913060852034490, guid: 6e488e64f14eccc4aae652d4ff735060, type: 3}
   Agrasive: 0
   Attack_range: 10
 --- !u!1 &1869165678506419643
