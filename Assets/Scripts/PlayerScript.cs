@@ -5,21 +5,22 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody rb;
+
     [Header("Movement")]
     private Vector3 velocity;
+
     public float speed = 5f;
     public Transform movementReference;
     public GameObject bullet;
     public Transform barrel;
     public Transform gunPivot;
+    public Transform fakeGunPivot;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
@@ -30,16 +31,17 @@ public class PlayerScript : MonoBehaviour
             Fire();
         }
 
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -9.812155f;
-        Vector3 dir = mousePos - Camera.main.WorldToScreenPoint(gunPivot.position);
+        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(gunPivot.position);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-       // Debug.Log(dir);
         gunPivot.localRotation = Quaternion.Euler(gunPivot.localRotation.eulerAngles.x, gunPivot.localRotation.eulerAngles.y, angle);
+        fakeGunPivot.transform.localRotation = Quaternion.Euler(90, 0, angle - 30);
     }
 
     public void Fire()
     {
-        Instantiate(bullet, barrel.position, barrel.rotation);
+        //90 - 30 Fake Gun Pivot
+        GameObject lastBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
+        lastBullet.transform.GetChild(1).transform.localRotation = Quaternion.Euler(60f, 30f ,gunPivot.transform.rotation.eulerAngles.z);
+        lastBullet.GetComponent<Rigidbody>().velocity = fakeGunPivot.right * 12.5f;
     }
 }
