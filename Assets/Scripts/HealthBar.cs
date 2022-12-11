@@ -6,10 +6,13 @@ public class HealthBar : MonoBehaviour
 {
     public Transform healthBar;
     public Transform healthBarIndicator;
+    Coroutine healthBarCoroutine;
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
-        StartCoroutine(UpdateHealthBarCoroutine(currentHealth, maxHealth));
+        if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);
+
+        healthBarCoroutine = StartCoroutine(UpdateHealthBarCoroutine(currentHealth, maxHealth));
     }
 
     public IEnumerator UpdateHealthBarCoroutine(float currentHealth, float maxHealth)
@@ -19,6 +22,8 @@ public class HealthBar : MonoBehaviour
 
         yield return UpdateBarScale(healthBarIndicator, currentHealth, maxHealth);
         yield return new WaitForSeconds(.1f);
+
+        healthBarCoroutine = null;
     }
     public IEnumerator UpdateBarScale(Transform bar, float currentHealth, float maxHealth)
     {

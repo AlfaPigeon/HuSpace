@@ -19,6 +19,10 @@ public class PlayerScript : MonoBehaviour
     public AudioSource playerAudio;
     public AudioClip shootingClip;
 
+    public HealthBar healthBar;
+    public float maxHealth;
+    public float currentHealth;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -71,5 +75,32 @@ public class PlayerScript : MonoBehaviour
         //Effects
         ScreenShaker.Instance.ShakeCamera(0.1f, 0.7f, 4f);
         playerAudio.PlayOneShot(shootingClip);
+    }
+
+    public void OnDamaged(float amount)
+    {
+        if (currentHealth - amount <= 0)
+        {
+            currentHealth = 0;
+            OnKilled();
+            return;
+        }
+
+        else currentHealth -= amount;
+
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+    }
+
+    public void OnHealed(float amount)
+    {
+        if (currentHealth + amount > maxHealth) currentHealth = maxHealth;
+        else currentHealth += amount;
+
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+    }
+
+    public void OnKilled()
+    {
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 }

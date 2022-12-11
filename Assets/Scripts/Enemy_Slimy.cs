@@ -6,7 +6,10 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Enemy_Slimy : Enemy
 {
+
+    [Header("Slimy")]
     public bool Agrasive = true;
+
 
     public float Attack_range = 10f;
 

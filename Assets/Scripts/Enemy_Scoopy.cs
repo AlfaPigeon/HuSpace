@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Scoopy : Enemy
 {
+    [Header("Scoopy")]
     public Rigidbody scoopyRigidbody;
     public float scoopySpeed;
     private Transform playerTransform;
@@ -11,10 +12,11 @@ public class Enemy_Scoopy : Enemy
     public bool aggressive;
 
     bool damagedToPlayer;
-    bool kiteGoBacking;
+    public bool kiteGoBacking;
 
     public override void Start()
     {
+        base.Start();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -23,7 +25,7 @@ public class Enemy_Scoopy : Enemy
         if (aggressive && !kiteGoBacking) scoopyRigidbody.velocity = (playerTransform.position - transform.position).normalized * scoopySpeed;
     }
 
-    IEnumerator KiteGoBack(float secs)
+    public IEnumerator KiteGoBack(float secs)
     {
         float kiteSeconds = 0;
         kiteGoBacking = true;
