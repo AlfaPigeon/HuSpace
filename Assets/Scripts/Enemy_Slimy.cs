@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class Enemy_Slimy : Enemy
 {
+    [Header("Slimy")]
     public bool Agrasive = false;
 
     public float Attack_range = 10f;

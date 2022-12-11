@@ -6,11 +6,18 @@ public class EnemyColliderController : MonoBehaviour
 {
     public Enemy enemy;
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider trigger)
     {
-        if (other.gameObject.CompareTag("Player") && enemy.enemyType == Enemy.EnemyType.Scoopy)
+        Debug.Log("Collided to " + trigger.gameObject.name);
+
+        if (trigger.CompareTag("Player") && enemy.enemyType == Enemy.EnemyType.Scoopy)
         {
-            Debug.Log("Scoopy Hit");
+            Enemy_Scoopy scoopy = enemy as Enemy_Scoopy;
+            if (!scoopy.kiteGoBacking)
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().OnDamaged(enemy.damage);
+                scoopy.StartCoroutine(scoopy.KiteGoBack(.5f));
+            }
         }
     }
 }
