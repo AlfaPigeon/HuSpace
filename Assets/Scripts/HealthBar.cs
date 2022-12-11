@@ -8,6 +8,12 @@ public class HealthBar : MonoBehaviour
     public Transform healthBarIndicator;
     Coroutine healthBarCoroutine;
 
+
+    private void LateUpdate()
+    {
+        transform.rotation = Quaternion.Euler(60f, 30f, 0);
+    }
+
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
         if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);

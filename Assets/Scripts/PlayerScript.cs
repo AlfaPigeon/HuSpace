@@ -23,9 +23,13 @@ public class PlayerScript : MonoBehaviour
     public float maxHealth;
     public float currentHealth;
 
+    private Animator animator;
+    private CharacterController characterController;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -42,8 +46,26 @@ public class PlayerScript : MonoBehaviour
 
     private void UpdatePlayerMovement()
     {
-        velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
-        rb.velocity = velocity;
+       
+       // velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
+
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+       
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+
+        characterController.Move(move * Time.deltaTime * speed);
+
+
+
+
+        animator.SetFloat("Velocity", characterController.velocity.magnitude);
+
+        //rb.velocity = velocity;
     }
 
     private void UpdateGunRotation()
