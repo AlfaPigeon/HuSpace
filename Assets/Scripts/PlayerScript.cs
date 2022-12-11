@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour
 
     public float speed = 5f;
     public Transform movementReference;
+    private Vector3 movementReference_right;
+    private Vector3 movementReference_forward;
     public GameObject bullet;
     public Transform barrel;
     public Transform gunPivot;
@@ -30,6 +32,8 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        movementReference_right = movementReference.right;
+        movementReference_forward = movementReference.forward;
     }
 
     void Update()
@@ -46,11 +50,11 @@ public class PlayerScript : MonoBehaviour
 
     private void UpdatePlayerMovement()
     {
-       
-       // velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
+
+        // velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
 
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move =( Input.GetAxis("Horizontal") * movementReference_right + Input.GetAxis("Vertical") * movementReference_forward).normalized;
 
        
         if (move != Vector3.zero)
