@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Enemy_Slimy : Enemy
 {
-    public bool Agrasive = false;
+    public bool Agrasive = true;
 
     public float Attack_range = 10f;
+
+    public float Attack_Cooldown = 4f;
 
     public GameObject Slime_Attack;
     public override void Start()
@@ -39,6 +42,21 @@ public class Enemy_Slimy : Enemy
         }
     }
 
+
+    public void WaitForAttack()
+    {
+        StartCoroutine(WaitForAttack(Attack_Cooldown));
+    }
+    private IEnumerator WaitForAttack(float cd)
+    {
+
+
+
+            yield return new WaitForSeconds(cd);
+        
+
+        Agrasive = true;
+    }
     public void Attack(Transform enemy)
     {
         GameObject gameObject =  Instantiate(Slime_Attack, transform.position,transform.rotation);
