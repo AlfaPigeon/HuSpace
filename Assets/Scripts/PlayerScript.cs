@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+       
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         movementReference_right = movementReference.right;
@@ -39,16 +40,40 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         UpdatePlayerMovement();
+        UpdatePlayerDodge();
         UpdateGunRotation();
+        UpdateGunFire();
+    }
 
+    private void UpdateGunFire()
+    {
         //Check for fire
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Fire();
         }
     }
+    private void UpdatePlayerDodge()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("Shift is down");
+            Vector3 move = (Input.GetAxis("Horizontal") * movementReference_right + Input.GetAxis("Vertical") * movementReference_forward).normalized;
+            characterController.enabled = false;
+            rb.isKinematic = false;
+            if (move == Vector3.zero)
+            {
+                move = transform.forward;            
+            }
 
-    private void UpdatePlayerMovement()
+            rb.velocity = move*5f;
+           
+            rb.isKinematic = true;
+            characterController.enabled = true;
+        }
+    
+    }
+        private void UpdatePlayerMovement()
     {
 
         // velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
@@ -74,8 +99,20 @@ public class PlayerScript : MonoBehaviour
 
     private void UpdateGunRotation()
     {
+        //Position
+
+        Vector3 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+
+
+        Debug.DrawLine(transform.position,dir);
+
+        gunPivot.transform.localPosition = dir;
+        fakeGunPivot.transform.localPosition = dir;
+
+        //Rotation
+
         //Get direction between mouse and gun
-        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(gunPivot.position);
+        dir = Input.mousePosition - Camera.main.WorldToScreenPoint(gunPivot.position);
 
         //Get angle between mouse and gun from direction
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
