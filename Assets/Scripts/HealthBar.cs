@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.rotation = Quaternion.Euler(60f, 0f, 0);
+        transform.rotation = Camera.main.transform.rotation;
     }
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)

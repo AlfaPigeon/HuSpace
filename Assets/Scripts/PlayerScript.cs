@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -9,7 +10,8 @@ public class PlayerScript : MonoBehaviour
 
     [Header("Movement")]
     private Vector3 velocity;
-
+    public bool Grounded = false;
+    public Transform Ground_ref;
     public float speed = 5f;
     public Transform movementReference;
     private Vector3 movementReference_right;
@@ -36,10 +38,15 @@ public class PlayerScript : MonoBehaviour
        
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        
+        UpdateMovementReference();
+    }
+
+    public void UpdateMovementReference()
+    {
         movementReference_right = movementReference.right;
         movementReference_forward = movementReference.forward;
     }
-
     void Update()
     {
         UpdatePlayerMovement();
@@ -48,6 +55,15 @@ public class PlayerScript : MonoBehaviour
         UpdateGunFire();
     }
 
+    
+    private void FixedUpdate()
+    {
+
+        if(WorldGravity.instance != null) Grounded = Physics.Raycast(transform.position, -WorldGravity.instance.Active_vector_up, 14f + 0.1f);
+
+
+        
+    }
     private void UpdateGunFire()
     {
         //Check for fire
@@ -79,9 +95,11 @@ public class PlayerScript : MonoBehaviour
         private void UpdatePlayerMovement()
     {
 
-        // velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
+        //velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
 
+        Vector3 move = (Input.GetAxis("Horizontal") * WorldGravity.instance.Active_vector_right+ Input.GetAxis("Vertical") * WorldGravity.instance.Active_vector_forward).normalized;
 
+        /*
         Vector3 move =( Input.GetAxis("Horizontal") * movementReference_right + Input.GetAxis("Vertical") * movementReference_forward).normalized;
 
        
@@ -91,14 +109,20 @@ public class PlayerScript : MonoBehaviour
         }
 
         characterController.Move(move * Time.deltaTime * speed);
+        */
+        
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move.normalized;
+            rb.velocity = transform.forward * speed;
+            if(!Grounded )rb.velocity += Physics.gravity;
+        }
+   
 
+        animator.SetFloat("Velocity", rb.velocity.magnitude);
 
-
-
-        animator.SetFloat("Velocity", characterController.velocity.magnitude);
-
-        //rb.velocity = velocity;
-    }
+       
+        }
 
     public Vector3 target;
     private void UpdateGunRotation()
@@ -113,7 +137,7 @@ public class PlayerScript : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Debug.DrawLine(transform.position, hit.point);
-            target =   new Vector3(hit.point.x, barrel.position.y, hit.point.z);
+            target =   new Vector3(hit.point.x, hit.point.y, hit.point.z);
             gunPivot.LookAt(target);
         }
 

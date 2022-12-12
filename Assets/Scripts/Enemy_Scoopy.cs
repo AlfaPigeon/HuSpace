@@ -39,4 +39,21 @@ public class Enemy_Scoopy : Enemy
 
         kiteGoBacking = false;
     }
+
+
+
+    private void OnTriggerEnter(Collider trigger)
+    {
+        Debug.Log("Collided to " + trigger.gameObject.name);
+
+        if (trigger.CompareTag("Player") )
+        {
+          
+            if (!kiteGoBacking)
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().OnDamaged(damage);
+                StartCoroutine(KiteGoBack(.5f));
+            }
+        }
+    }
 }
