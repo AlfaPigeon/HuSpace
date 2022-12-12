@@ -13,7 +13,7 @@ public class Enemy_Slimy : Enemy
 
     public float Attack_range = 10f;
 
-    public float Attack_Cooldown = 4f;
+    public float Attack_Cooldown = 2f;
 
     public GameObject Slime_Attack;
     public override void Start()

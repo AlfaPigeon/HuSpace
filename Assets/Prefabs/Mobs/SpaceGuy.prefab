@@ -1015,7 +1015,7 @@ GameObject:
   - component: {fileID: 7285595369991442796}
   m_Layer: 0
   m_Name: Camera Target
-  m_TagString: Untagged
+  m_TagString: SfxSource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1112,6 +1112,7 @@ GameObject:
   - component: {fileID: 7285595368651958318}
   - component: {fileID: 7285595368651958304}
   - component: {fileID: 7285595368651958305}
+  - component: {fileID: 4946120165951585129}
   m_Layer: 0
   m_Name: SpaceGuy
   m_TagString: Player
@@ -1297,6 +1298,21 @@ MonoBehaviour:
   currentHealth: 100
   cinemachineBrain: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
+--- !u!114 &4946120165951585129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7627632888316581014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd8b25368ae99647bc0604760ae4f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active_vector_forward: {x: 0, y: 0, z: 0}
+  Active_vector_right: {x: 0, y: 0, z: 0}
+  Active_vector_up: {x: 0, y: 0, z: 0}
 --- !u!1 &7646728436329985997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531473238379382633, guid: 9c530315fe64b1e45bd3bcb7bcd1b952, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2531473238379382633, guid: 9c530315fe64b1e45bd3bcb7bcd1b952, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1480,7 +1496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531473238379382633, guid: 9c530315fe64b1e45bd3bcb7bcd1b952, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2531473238379382633, guid: 9c530315fe64b1e45bd3bcb7bcd1b952, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1611,7 +1627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4729077796515663731, guid: 59afacfed2fcfec4bb9fc724d8d3cf0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4729077796515663731, guid: 59afacfed2fcfec4bb9fc724d8d3cf0e, type: 3}
       propertyPath: m_LocalPosition.z

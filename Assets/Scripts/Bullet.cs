@@ -14,6 +14,9 @@ public class Bullet : MonoBehaviour
         {
             other.transform.parent.GetComponent<Enemy>().OnDamaged(20f);
             Destroy(transform.parent.gameObject);
+        }else if(gameObject.tag == "Enemy" && other.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerScript>().OnDamaged(5f);
         }
     }
 }

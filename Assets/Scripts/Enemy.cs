@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
-      //  sfxSource = GameObject.FindGameObjectWithTag("SfxSource").GetComponent<AudioSource>();
+        sfxSource = FindObjectOfType<AudioSource>();
         playerScript = player.GetComponent<PlayerScript>();
     }
 
@@ -62,6 +62,12 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
         if (dieParticle != null) Instantiate(dieParticle, transform.position, Quaternion.identity);
-       // if (dieSound != null) sfxSource.PlayOneShot(dieSound);
+       if (dieSound != null) sfxSource.PlayOneShot(dieSound);
+    }
+
+    private void LateUpdate()
+    {
+        SpriteRenderer sr = GetComponentInChildren<SpriteRenderer>();
+        sr.transform.rotation = Camera.main.transform.rotation;
     }
 }

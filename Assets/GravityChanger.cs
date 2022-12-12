@@ -13,6 +13,7 @@ public class GravityChanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        worldGravity.SwitchToGravity(other.gameObject, ChangeIndex);
+        if(other.GetComponent<SpaceMass>() != null)
+        worldGravity.SwitchToGravity(other.GetComponent<SpaceMass>(), ChangeIndex);
     }
 }

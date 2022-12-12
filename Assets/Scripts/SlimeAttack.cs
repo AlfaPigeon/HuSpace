@@ -23,7 +23,7 @@ public class SlimeAttack : MonoBehaviour
     {
         while (maxvalue> value)
         {
-            value += 0.2f;
+            value += 0.5f;
             sprite.localScale = new Vector3(value, 0.05f, 1f);
 
             yield return new WaitForSeconds(0.1f);
@@ -40,11 +40,14 @@ public class SlimeAttack : MonoBehaviour
         if(other.tag == "Player")
         {
             if(enemy == null) Destroy(gameObject);
-            enemy.GetComponent<Rigidbody>().velocity = 10*(other.transform.position - enemy.transform.position).normalized;
+            enemy.GetComponent<Rigidbody>().velocity = 30*(other.transform.position - enemy.transform.position).normalized;
             enemy.WaitForAttack();
             Destroy(gameObject);
         }
 
     }
+
+
+
 
 }

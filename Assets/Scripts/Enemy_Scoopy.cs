@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Enemy_Scoopy : Enemy
@@ -13,12 +14,45 @@ public class Enemy_Scoopy : Enemy
 
     bool damagedToPlayer;
     public bool kiteGoBacking;
-
+    public GameObject bullet;
     public override void Start()
     {
         base.Start();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
+
+
+
+    private IEnumerator Attack()
+    {
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+
+            //Spawn a bullet
+            GameObject lastBullet = Instantiate(bullet,transform.position, transform.rotation);
+
+            //Set bullet rotation to gun rotation
+            lastBullet.transform.GetChild(1).transform.forward = hit.transform.position - transform.position;
+
+            //Move along fake pivot axis
+
+
+            lastBullet.GetComponent<Rigidbody>().velocity = (hit.transform.position - transform.position) * 22.5f;
+
+            lastBullet.tag = "Enemy";
+            lastBullet.GetComponent<Light>().color = Color.red;
+
+        }
+
+
+        yield return new WaitForSeconds(0.5f);
+    }
+
+
 
     private void Update()
     {

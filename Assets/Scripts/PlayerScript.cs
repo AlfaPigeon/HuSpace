@@ -32,11 +32,12 @@ public class PlayerScript : MonoBehaviour
     private CharacterController characterController;
 
     public CinemachineBrain cinemachineBrain;
+    private SpaceMass spaceMass;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       
-        animator = GetComponent<Animator>();
+        spaceMass=GetComponent<SpaceMass>();
+         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         
         UpdateMovementReference();
@@ -56,14 +57,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     
-    private void FixedUpdate()
-    {
-
-        if(WorldGravity.instance != null) Grounded = Physics.Raycast(transform.position, -WorldGravity.instance.Active_vector_up, 14f + 0.1f);
-
-
-        
-    }
+ 
     private void UpdateGunFire()
     {
         //Check for fire
@@ -97,7 +91,7 @@ public class PlayerScript : MonoBehaviour
 
         //velocity = (Input.GetAxisRaw("Horizontal") * movementReference.transform.right + Input.GetAxisRaw("Vertical") * movementReference.forward).normalized * speed;
 
-        Vector3 move = (Input.GetAxis("Horizontal") * WorldGravity.instance.Active_vector_right+ Input.GetAxis("Vertical") * WorldGravity.instance.Active_vector_forward).normalized;
+        Vector3 move = (Input.GetAxis("Horizontal") * spaceMass.Active_vector_right+ Input.GetAxis("Vertical") * spaceMass.Active_vector_forward).normalized;
 
         /*
         Vector3 move =( Input.GetAxis("Horizontal") * movementReference_right + Input.GetAxis("Vertical") * movementReference_forward).normalized;
@@ -115,7 +109,7 @@ public class PlayerScript : MonoBehaviour
         {
             gameObject.transform.forward = move.normalized;
             rb.velocity = transform.forward * speed;
-            if(!Grounded )rb.velocity += Physics.gravity;
+           
         }
    
 
@@ -136,8 +130,10 @@ public class PlayerScript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
+
             Debug.DrawLine(transform.position, hit.point);
-            target =   new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            
+            target =   (new Vector3(hit.point.x, hit.point.y, hit.point.z));
             gunPivot.LookAt(target);
         }
 
@@ -176,12 +172,12 @@ public class PlayerScript : MonoBehaviour
         GameObject lastBullet = Instantiate(bullet, barrel.transform.position, Quaternion.identity);
 
         //Set bullet rotation to gun rotation
-        lastBullet.transform.GetChild(1).transform.localRotation = Quaternion.Euler(60f, 30f ,gunPivot.transform.rotation.eulerAngles.z);
+        lastBullet.transform.GetChild(1).transform.forward = barrel.transform.forward;
 
         //Move along fake pivot axis
 
 
-        lastBullet.GetComponent<Rigidbody>().velocity = barrel.forward * 12.5f;
+        lastBullet.GetComponent<Rigidbody>().velocity = barrel.forward * 22.5f;
 
         //lastBullet.GetComponent<Rigidbody>().velocity = fakeGunPivot.right * 12.5f;
 
@@ -215,5 +211,17 @@ public class PlayerScript : MonoBehaviour
     public void OnKilled()
     {
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
+    }
+
+    public void GetStunned()
+    {
+        OnDamaged(10f);
+        StartCoroutine(Stuned());
+    }
+    private IEnumerator Stuned()
+    {
+        speed = speed * (0.01f);
+        yield return new WaitForSeconds(2f);
+        speed = speed * (100f);
     }
 }
