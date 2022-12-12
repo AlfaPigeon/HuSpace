@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,8 @@ public class PlayerScript : MonoBehaviour
 
     private Animator animator;
     private CharacterController characterController;
+
+    public CinemachineBrain cinemachineBrain;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,7 +57,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
     private void UpdatePlayerDodge()
-    {
+    {/*
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             Debug.Log("Shift is down");
@@ -70,7 +73,7 @@ public class PlayerScript : MonoBehaviour
            
             rb.isKinematic = true;
             characterController.enabled = true;
-        }
+        }*/
     
     }
         private void UpdatePlayerMovement()
@@ -97,8 +100,25 @@ public class PlayerScript : MonoBehaviour
         //rb.velocity = velocity;
     }
 
+    public Vector3 target;
     private void UpdateGunRotation()
     {
+
+        //Vector3 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+
+
+        Ray ray =  Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.DrawLine(transform.position, hit.point);
+            target =   new Vector3(hit.point.x, barrel.position.y, hit.point.z);
+            gunPivot.LookAt(target);
+        }
+
+        //gunPivot.LookAt(new Vector3(target.x, barrel.position.y, target.z));
+        /*
         //Position
 
         Vector3 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
@@ -122,6 +142,8 @@ public class PlayerScript : MonoBehaviour
 
         //Using fake pivot because of bullet movement problem
         fakeGunPivot.transform.localRotation = Quaternion.Euler(90, 0, angle - 30);
+
+        */
     }
 
     public void Fire()
@@ -133,7 +155,11 @@ public class PlayerScript : MonoBehaviour
         lastBullet.transform.GetChild(1).transform.localRotation = Quaternion.Euler(60f, 30f ,gunPivot.transform.rotation.eulerAngles.z);
 
         //Move along fake pivot axis
-        lastBullet.GetComponent<Rigidbody>().velocity = fakeGunPivot.right * 12.5f;
+
+
+        lastBullet.GetComponent<Rigidbody>().velocity = barrel.forward * 12.5f;
+
+        //lastBullet.GetComponent<Rigidbody>().velocity = fakeGunPivot.right * 12.5f;
 
         //Effects
         ScreenShaker.Instance.ShakeCamera(0.1f, 0.7f, 4f);

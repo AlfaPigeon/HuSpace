@@ -22,7 +22,7 @@ public class Enemy_Scoopy : Enemy
 
     private void Update()
     {
-        if (aggressive && !kiteGoBacking) scoopyRigidbody.velocity = (playerTransform.position - transform.position).normalized * scoopySpeed;
+        if (playerTransform != null && aggressive && !kiteGoBacking) scoopyRigidbody.velocity = (playerTransform.position - transform.position).normalized * scoopySpeed;
     }
 
     public IEnumerator KiteGoBack(float secs)

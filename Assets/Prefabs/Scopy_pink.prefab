@@ -110,8 +110,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7033001, y: 1.2481261, z: 2.025312}
-  m_Center: {x: -0.08335358, y: -0.039078534, z: 0.036807775}
+  m_Size: {x: 1.8164394, y: 1.2481261, z: 1.647257}
+  m_Center: {x: -0.095531106, y: -0.039078534, z: -0.19408458}
 --- !u!65 &7934862910784575106
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,8 +123,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3573024, y: 1.1487864, z: 1.25529}
-  m_Center: {x: -0.042196274, y: -0.039078534, z: -0.052375793}
+  m_Size: {x: 1.3573024, y: 1.1487864, z: 1.7380695}
+  m_Center: {x: -0.042196274, y: -0.039078534, z: 0.18901396}
 --- !u!1 &1869165678435930618
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1869165678435930621}
   - component: {fileID: 5456849068425700395}
   m_Layer: 0
-  m_Name: Scopy
+  m_Name: Scopy_pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e710291c50fd884dba6ffd986d957c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2405562f6426f69408ca68b31dc72809, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
